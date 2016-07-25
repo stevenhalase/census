@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="censusApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Census</title>
+    <script src="./lib/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="./lib/angular/angular.js" charset="utf-8"></script>
+    <script src="./lib/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="./lib/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="app.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="./css/app.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body ng-controller="mainCtrl as mCtrl">
+
+    <div class="container">
+      <div class="row">
+        <div class="jumbotron">
+          <h1>{{mCtrl.title}}</h1>
+
+          <form>
+           <div class="input-group">
+             <input type="text" class="form-control" placeholder="Street Address" ng-model="mCtrl.street">
+             <input type="text" class="form-control" placeholder="City" ng-model="mCtrl.city">
+             <input type="text" class="form-control" placeholder="State" ng-model="mCtrl.state">
+             <button type="submit" class="btn btn-default" ng-click="mCtrl.getData()">Submit</button>
+           </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading">Results</div>
+          <ul class="list-group">
+            <li class="list-group-item">State : {{mCtrl.stateName}}</li>
+            <li class="list-group-item">State ID : {{mCtrl.stateID}}</li>
+            <li class="list-group-item">County : {{mCtrl.countyName}}</li>
+            <li class="list-group-item">County ID : {{mCtrl.countyID}}</li>
+            <li class="list-group-item">Municipality : {{mCtrl.municipalityName}}</li>
+            <li class="list-group-item">Municipality ID : {{mCtrl.municipalityID}}</li>
+            <li class="list-group-item">Zip Code: {{mCtrl.zipCode}}</li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item">County Population Estimate: {{mCtrl.countyPopulation}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+  </body>
+</html>
