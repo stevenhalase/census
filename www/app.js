@@ -1,5 +1,5 @@
 
-var cApp = angular.module('censusApp', []);
+var cApp = angular.module('censusApp', ['angular-loading-bar']);
 cApp.controller('mainCtrl', mainController);
 
 mainController.$inject = ['$http'];
