@@ -20,15 +20,22 @@ function mainController($http) {
 
   mCtrl.getData = function() {
     console.log(mCtrl.location)
-    var mapQuestKey = 'Q6kWF9IYQkgFceAaU4R1prbAeWkzMVLr';
-    var mapquestQuery = 'http://www.mapquestapi.com/geocoding/v1/address?key=Q6kWF9IYQkgFceAaU4R1prbAeWkzMVLr&inFormat=json&json={"location":{"street": "' + mCtrl.street + '","city":"' + mCtrl.city + '","state":"' + mCtrl.state + '"}}'
 
-    $http.get(mapquestQuery)
+
+    $http({
+      url: '/mapquest',
+      method: 'POST',
+      data: { street : mCtrl.street, city : mCtrl.city, state : mCtrl.state }
+    })
       .then(function(response) {
         var lat = response.data.results[0].locations[0].latLng.lat;
         var lng = response.data.results[0].locations[0].latLng.lng;
 
-        $http.get('http://census.codeforamerica.org/areas?lat=' + lat + '&lon=' + lng + '&layers=state,county,cbsa,zcta510')
+        $http({
+          url : 'census-layer',
+          method: 'POST',
+          data: { lat : lat, lng : lng }
+        })
         // $http.get('http://census.codeforamerica.org/areas?lat=37.775793&lon=-122.413549')
           .then(function(response) {
             console.log('GEOCODE : ', response.data.features)
