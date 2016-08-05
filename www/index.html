@@ -14,6 +14,8 @@
   </head>
   <body ng-controller="mainCtrl as mCtrl">
 
+    <div class="alert alert-success" role="alert" ng-if="mCtrl.showFinished">Data Collected!</div>
+
     <div class="container">
       <div class="row">
         <div class="jumbotron">
@@ -31,21 +33,103 @@
       </div>
 
       <div class="row">
-        <div class="panel panel-default">
-          <div class="panel-heading">Results</div>
-          <ul class="list-group">
-            <li class="list-group-item">State : {{mCtrl.stateName}}</li>
-            <li class="list-group-item">State ID : {{mCtrl.stateID}}</li>
-            <li class="list-group-item">County : {{mCtrl.countyName}}</li>
-            <li class="list-group-item">County ID : {{mCtrl.countyID}}</li>
-            <li class="list-group-item">Municipality : {{mCtrl.municipalityName}}</li>
-            <li class="list-group-item">Municipality ID : {{mCtrl.municipalityID}}</li>
-            <li class="list-group-item">Zip Code: {{mCtrl.zipCode}}</li>
-            <li class="list-group-item"></li>
-            <li class="list-group-item">County Population Estimate: {{mCtrl.countyPopulation}}</li>
-          </ul>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Meta Data
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                <ul class="list-group">
+                  <li class="list-group-item">State : {{mCtrl.stateName}}</li>
+                  <li class="list-group-item">State ID : {{mCtrl.stateID}}</li>
+                  <li class="list-group-item">County : {{mCtrl.countyName}}</li>
+                  <li class="list-group-item">County ID : {{mCtrl.countyID}}</li>
+                  <li class="list-group-item">Place : {{mCtrl.placeName}}</li>
+                  <li class="list-group-item">Place ID : {{mCtrl.placeID}}</li>
+                  <li class="list-group-item">Zip Code: {{mCtrl.zipCode}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  Place Population Estimate
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+                <ul class="list-group">
+                  <li class="list-group-item">Place : {{mCtrl.placeName}}</li>
+                  <li class="list-group-item">Place ID : {{mCtrl.placeID}}</li>
+                  <li class="list-group-item">Place Population Estimate: {{mCtrl.placePopulation}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  Components of Change Estimates
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                <ul class="list-group">
+                  <li class="list-group-item">Location : {{mCtrl.GEONAME}}</li>
+                  <li class="list-group-item">Births : {{mCtrl.BIRTHS}}</li>
+                  <li class="list-group-item">Birth Rate : {{mCtrl.RBIRTH | number:2}}%</li>
+                  <li class="list-group-item">Deaths : {{mCtrl.DEATHS}}</li>
+                  <li class="list-group-item">Death Rate : {{mCtrl.RDEATH | number:2}}%</li>
+                  <li class="list-group-item">Domestic Migration : {{mCtrl.DOMESTICMIG}}</li>
+                  <li class="list-group-item">Domestic Migration Rate : {{mCtrl.RDOMESTICMIG | number:2}}%</li>
+                  <li class="list-group-item">International Migration : {{mCtrl.INTERNATIONALMIG}}</li>
+                  <li class="list-group-item">International Migration Rate : {{mCtrl.RINTERNATIONALMIG | number:2}}%</li>
+                  <li class="list-group-item">Net Migration : {{mCtrl.NETMIG}}</li>
+                  <li class="list-group-item">Net Migration Rate : {{mCtrl.RNETMIG | number:2}}%</li>
+                  <li class="list-group-item">Natural Increase : {{mCtrl.NATURALINC}}</li>
+                  <li class="list-group-item">Natural Increase Rate : {{mCtrl.RNATURALINC | number:2}}%</li>
+                  <li class="list-group-item">Residual : {{mCtrl.RESIDUAL}}</li>
+                  <li class="list-group-item">Last Update : {{mCtrl.LASTUPDATE}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFour">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                  Demographic Characteristics
+                </a>
+              </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+              <div class="panel-body">
+                <ul class="list-group">
+                  <li class="list-group-item">One : {{mCtrl.totalOnePopulation}}</li>
+                  <li class="list-group-item">Two : {{mCtrl.totalTwoPopulation}}</li>
+                  <li class="list-group-item">Three : {{mCtrl.totalThreePopulation}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
+
     </div>
 
 
