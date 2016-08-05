@@ -45,13 +45,13 @@
             <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
               <div class="panel-body">
                 <ul class="list-group">
-                  <li class="list-group-item">State : {{mCtrl.stateName}}</li>
-                  <li class="list-group-item">State ID : {{mCtrl.stateID}}</li>
-                  <li class="list-group-item">County : {{mCtrl.countyName}}</li>
-                  <li class="list-group-item">County ID : {{mCtrl.countyID}}</li>
-                  <li class="list-group-item">Place : {{mCtrl.placeName}}</li>
-                  <li class="list-group-item">Place ID : {{mCtrl.placeID}}</li>
-                  <li class="list-group-item">Zip Code: {{mCtrl.zipCode}}</li>
+                  <li class="list-group-item"><b>State :</b> {{mCtrl.stateName}}</li>
+                  <li class="list-group-item"><b>State ID :</b> {{mCtrl.stateID}}</li>
+                  <li class="list-group-item"><b>County :</b> {{mCtrl.countyName}}</li>
+                  <li class="list-group-item"><b>County ID :</b> {{mCtrl.countyID}}</li>
+                  <li class="list-group-item"><b>Place :</b> {{mCtrl.placeName}}</li>
+                  <li class="list-group-item"><b>Place ID :</b> {{mCtrl.placeID}}</li>
+                  <li class="list-group-item"><b>Zip Code :</b> {{mCtrl.zipCode}}</li>
                 </ul>
               </div>
             </div>
@@ -68,9 +68,9 @@
             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
               <div class="panel-body">
                 <ul class="list-group">
-                  <li class="list-group-item">Place : {{mCtrl.placeName}}</li>
-                  <li class="list-group-item">Place ID : {{mCtrl.placeID}}</li>
-                  <li class="list-group-item">Place Population Estimate: {{mCtrl.placePopulation}}</li>
+                  <li class="list-group-item"><b>Place :</b> {{mCtrl.placeName}}</li>
+                  <li class="list-group-item"><b>Place ID :</b> {{mCtrl.placeID}}</li>
+                  <li class="list-group-item"><b>Place Population Estimate:</b> {{mCtrl.placePopulation}}</li>
                 </ul>
               </div>
             </div>
@@ -87,21 +87,21 @@
             <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
               <div class="panel-body">
                 <ul class="list-group">
-                  <li class="list-group-item">Location : {{mCtrl.GEONAME}}</li>
-                  <li class="list-group-item">Births : {{mCtrl.BIRTHS}}</li>
-                  <li class="list-group-item">Birth Rate : {{mCtrl.RBIRTH | number:2}}%</li>
-                  <li class="list-group-item">Deaths : {{mCtrl.DEATHS}}</li>
-                  <li class="list-group-item">Death Rate : {{mCtrl.RDEATH | number:2}}%</li>
-                  <li class="list-group-item">Domestic Migration : {{mCtrl.DOMESTICMIG}}</li>
-                  <li class="list-group-item">Domestic Migration Rate : {{mCtrl.RDOMESTICMIG | number:2}}%</li>
-                  <li class="list-group-item">International Migration : {{mCtrl.INTERNATIONALMIG}}</li>
-                  <li class="list-group-item">International Migration Rate : {{mCtrl.RINTERNATIONALMIG | number:2}}%</li>
-                  <li class="list-group-item">Net Migration : {{mCtrl.NETMIG}}</li>
-                  <li class="list-group-item">Net Migration Rate : {{mCtrl.RNETMIG | number:2}}%</li>
-                  <li class="list-group-item">Natural Increase : {{mCtrl.NATURALINC}}</li>
-                  <li class="list-group-item">Natural Increase Rate : {{mCtrl.RNATURALINC | number:2}}%</li>
-                  <li class="list-group-item">Residual : {{mCtrl.RESIDUAL}}</li>
-                  <li class="list-group-item">Last Update : {{mCtrl.LASTUPDATE}}</li>
+                  <li class="list-group-item"><b>Location :</b> {{mCtrl.GEONAME}}</li>
+                  <li class="list-group-item"><b>Births :</b> {{mCtrl.BIRTHS}}</li>
+                  <li class="list-group-item"><b>Birth Rate :</b> {{mCtrl.RBIRTH | number:2}}%</li>
+                  <li class="list-group-item"><b>Deaths :</b> {{mCtrl.DEATHS}}</li>
+                  <li class="list-group-item"><b>Death Rate :</b> {{mCtrl.RDEATH | number:2}}%</li>
+                  <li class="list-group-item"><b>Domestic Migration :</b> {{mCtrl.DOMESTICMIG}}</li>
+                  <li class="list-group-item"><b>Domestic Migration Rate :</b> {{mCtrl.RDOMESTICMIG | number:2}}%</li>
+                  <li class="list-group-item"><b>International Migration :</b> {{mCtrl.INTERNATIONALMIG}}</li>
+                  <li class="list-group-item"><b>International Migration Rate :</b> {{mCtrl.RINTERNATIONALMIG | number:2}}%</li>
+                  <li class="list-group-item"><b>Net Migration :</b> {{mCtrl.NETMIG}}</li>
+                  <li class="list-group-item"><b>Net Migration Rate :</b> {{mCtrl.RNETMIG | number:2}}%</li>
+                  <li class="list-group-item"><b>Natural Increase :</b> {{mCtrl.NATURALINC}}</li>
+                  <li class="list-group-item"><b>Natural Increase Rate :</b> {{mCtrl.RNATURALINC | number:2}}%</li>
+                  <li class="list-group-item"><b>Residual :</b> {{mCtrl.RESIDUAL}}</li>
+                  <li class="list-group-item"><b>Last Update :</b> {{mCtrl.LASTUPDATE}}</li>
                 </ul>
               </div>
             </div>
@@ -111,17 +111,81 @@
             <div class="panel-heading" role="tab" id="headingFour">
               <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                  Demographic Characteristics
+                  Gender Demographics
                 </a>
               </h4>
             </div>
             <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
               <div class="panel-body">
                 <ul class="list-group">
-                  <li class="list-group-item">One : {{mCtrl.totalOnePopulation}}</li>
-                  <li class="list-group-item">Two : {{mCtrl.totalTwoPopulation}}</li>
-                  <li class="list-group-item">Three : {{mCtrl.totalThreePopulation}}</li>
+                  <li class="list-group-item"><b>Total :</b> {{mCtrl.totalBothPopulation}}</li>
                 </ul>
+                <div class="col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item"><b>Male :</b> {{mCtrl.totalMalePopulation}}</li>
+                    <li class="list-group-item"><b>Male Median Age :</b> {{mCtrl.maleMedianAge}}</li>
+                    <li class="list-group-item" ng-repeat="segment in mCtrl.maleAgeGroups"><b>{{segment.gender}} {{segment.ageGroup}} :</b> {{segment.value}}</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item"><b>Female :</b> {{mCtrl.totalFemalePopulation}}</li>
+                    <li class="list-group-item"><b>Female Median Age :</b> {{mCtrl.femaleMedianAge}}</li>
+                    <li class="list-group-item" ng-repeat="segment in mCtrl.femaleAgeGroups"><b>{{segment.gender}} {{segment.ageGroup}} :</b> {{segment.value}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFour">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                  Race Demographics
+                </a>
+              </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+              <div class="panel-body">
+                <ul class="list-group">
+                  <li class="list-group-item"><b>Total :</b> {{mCtrl.totalBothPopulation}}</li>
+                </ul>
+                <div class="col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item"><b>White Total :</b> {{mCtrl.whiteTotal}}</li>
+                    <li class="list-group-item"><b>White Percentage :</b> {{mCtrl.whiteTotal / mCtrl.totalBothPopulation * 100 | number: 2}}%</li>
+                    <li class="list-group-item" ng-repeat="segment in mCtrl.whiteAgeGroups"><b>{{segment.race}} {{segment.ageGroup}} :</b> {{segment.value}}</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item"><b>Black Total :</b> {{mCtrl.blackTotal}}</li>
+                    <li class="list-group-item"><b>Black Percentage :</b> {{mCtrl.blackTotal / mCtrl.totalBothPopulation * 100 | number: 2}}%</li>
+                    <li class="list-group-item" ng-repeat="segment in mCtrl.blackAgeGroups"><b>{{segment.race}} {{segment.ageGroup}} :</b> {{segment.value}}</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item"><b>American Indian / Alaskan Native Total :</b> {{mCtrl.americanIndianAlaskanNativeTotal}}</li>
+                    <li class="list-group-item"><b>American Indian / Alaskan Native Percentage :</b> {{mCtrl.americanIndianAlaskanNativeTotal / mCtrl.totalBothPopulation * 100 | number: 2}}%</li>
+                    <li class="list-group-item" ng-repeat="segment in mCtrl.americanIndianAlaskanNativeAgeGroups"><b>{{segment.race}} {{segment.ageGroup}} :</b> {{segment.value}}</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item"><b>Asian Total :</b> {{mCtrl.asianTotal}}</li>
+                    <li class="list-group-item"><b>Asian Percentage :</b> {{mCtrl.asianTotal / mCtrl.totalBothPopulation * 100 | number: 2}}%</li>
+                    <li class="list-group-item" ng-repeat="segment in mCtrl.asianAgeGroups"><b>{{segment.race}} {{segment.ageGroup}} :</b> {{segment.value}}</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item"><b>Native Hawaiian / Other Pacific Islander Total :</b> {{mCtrl.nativeHawaiianOtherPacificTotal}}</li>
+                    <li class="list-group-item"><b>Native Hawaiian / Other Pacific Islander Percentage :</b> {{mCtrl.nativeHawaiianOtherPacificTotal / mCtrl.totalBothPopulation * 100 | number: 2}}%</li>
+                    <li class="list-group-item" ng-repeat="segment in mCtrl.nativeHawaiianOtherPacificAgeGroups"><b>{{segment.race}} {{segment.ageGroup}} :</b> {{segment.value}}</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

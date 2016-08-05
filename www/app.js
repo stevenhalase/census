@@ -59,89 +59,214 @@ function mainController($http) {
               }
 
             }
-            console.log('State: ', mCtrl.stateID,'County: ', mCtrl.countyID, 'Place: ', mCtrl.placeID);
+          console.log('State: ', mCtrl.stateID,'County: ', mCtrl.countyID, 'Place: ', mCtrl.placeID);
 
-            // Get Place Population Estimate
-            $http({
-              url: '/api/population-estimate',
-              method: 'POST',
-              data: {
-                stateID: mCtrl.stateID,
-                countyID: mCtrl.countyID,
-                placeID: mCtrl.placeID
-              }
+          // Get Place Population Estimate
+          $http({
+            url: '/api/population-estimate',
+            method: 'POST',
+            data: {
+              stateID: mCtrl.stateID,
+              countyID: mCtrl.countyID,
+              placeID: mCtrl.placeID
+            }
+          })
+            .then(function(response) {
+              console.log('Census: ', response, 'County: ', response.data[1][0])
+              mCtrl.placePopulation = response.data[1][0];
             })
-              .then(function(response) {
-                console.log('Census: ', response, 'County: ', response.data[1][0])
-                mCtrl.placePopulation = response.data[1][0];
-              })
 
-            // Get Components of Change
-            $http({
-              url: '/api/components-of-change',
-              method: 'POST',
-              data: {
-                stateID: mCtrl.stateID,
-                countyID: mCtrl.countyID,
-                placeID: mCtrl.placeID
-              }
+          // Get Components of Change
+          $http({
+            url: '/api/components-of-change',
+            method: 'POST',
+            data: {
+              stateID: mCtrl.stateID,
+              countyID: mCtrl.countyID,
+              placeID: mCtrl.placeID
+            }
+          })
+            .then(function(response) {
+              console.log('Components of Change: ', response)
+              mCtrl.GEONAME = response.data[1][0];
+              mCtrl.BIRTHS = response.data[1][1];
+              mCtrl.DEATHS = response.data[1][2];
+              mCtrl.RBIRTH = response.data[1][3];
+              mCtrl.RDEATH = response.data[1][4];
+              mCtrl.DOMESTICMIG = response.data[1][5];
+              mCtrl.INTERNATIONALMIG = response.data[1][6];
+              mCtrl.NATURALINC = response.data[1][7];
+              mCtrl.NETMIG = response.data[1][8];
+              mCtrl.RDOMESTICMIG = response.data[1][9];
+              mCtrl.RESIDUAL = response.data[1][10];
+              mCtrl.RINTERNATIONALMIG = response.data[1][11];
+              mCtrl.RNATURALINC = response.data[1][12];
+              mCtrl.RNETMIG = response.data[1][13];
+              mCtrl.LASTUPDATE = response.data[1][14];
             })
-              .then(function(response) {
-                console.log('Components of Change: ', response)
-                mCtrl.GEONAME = response.data[1][0];
-                mCtrl.BIRTHS = response.data[1][1];
-                mCtrl.DEATHS = response.data[1][2];
-                mCtrl.RBIRTH = response.data[1][3];
-                mCtrl.RDEATH = response.data[1][4];
-                mCtrl.DOMESTICMIG = response.data[1][5];
-                mCtrl.INTERNATIONALMIG = response.data[1][6];
-                mCtrl.NATURALINC = response.data[1][7];
-                mCtrl.NETMIG = response.data[1][8];
-                mCtrl.RDOMESTICMIG = response.data[1][9];
-                mCtrl.RESIDUAL = response.data[1][10];
-                mCtrl.RINTERNATIONALMIG = response.data[1][11];
-                mCtrl.RNATURALINC = response.data[1][12];
-                mCtrl.RNETMIG = response.data[1][13];
-                mCtrl.LASTUPDATE = response.data[1][14];
-              })
 
-            // Get Characteristics By Age Group
-            $http({
-              url: '/api/characteristics-by-age-group',
-              method: 'POST',
-              data: {
-                stateID: mCtrl.stateID,
-                countyID: mCtrl.countyID,
-                placeID: mCtrl.placeID
-              }
-            })
-              .then(function(response) {
-                console.log('Characteristics By Age Group: ', response)
-                mCtrl.totalOnePopulation = 0;
-                mCtrl.totalTwoPopulation = 0;
-                mCtrl.totalThreePopulation = 0;
-                for (var i = 0; i < response.data.length; i++) {
-                  console.log(response.data[i][2])
-                  if ((i !== 1) && response.data[i][2] == 0) {
-                    console.log('One +' + response.data[i][0])
-                    mCtrl.totalOnePopulation = mCtrl.totalOnePopulation + parseInt(response.data[i][0]);
-                  } else if ((i !== 1) && response.data[i][2] == 1) {
-                    console.log('Two +' + response.data[i][0])
-                    mCtrl.totalTwoPopulation = mCtrl.totalTwoPopulation + parseInt(response.data[i][0]);
-                  } else if ((i !== 1) && response.data[i][2] == 2) {
-                    console.log('Three +' + response.data[i][0])
-                    mCtrl.totalThreePopulation = mCtrl.totalThreePopulation + parseInt(response.data[i][0]);
-                  }
+          // Get Characteristics By Age Group
+          $http({
+            url: '/api/characteristics-by-age-group/gender',
+            method: 'POST',
+            data: {
+              stateID: mCtrl.stateID,
+              countyID: mCtrl.countyID,
+              placeID: mCtrl.placeID
+            }
+          })
+            .then(function(response) {
+              console.log('Characteristics By Age Group: ', response)
+              mCtrl.totalBothPopulation = 0;
+              mCtrl.totalMalePopulation = 0;
+              mCtrl.totalFemalePopulation = 0;
+
+              // Get Total Population By Gender
+              for (var i = 0; i < response.data.length; i++) {
+                // console.log(response.data[i][2])
+                if ((i !== 0 || 1) &&  (response.data[i][3] > 0) &&  (response.data[i][3] <= 18) && response.data[i][2] == 0) {
+                  // console.log('Both Before Total+', mCtrl.totalBothPopulation)
+                  mCtrl.totalBothPopulation += parseInt(response.data[i][0]);
+                  // console.log('Both Total+', mCtrl.totalBothPopulation, 'Adding+', response.data[i][0])
+                } else if ((i !== 0 || 1) &&  (response.data[i][3] > 0) && (response.data[i][3] <= 18)  && response.data[i][2] == 1) {
+                  mCtrl.totalMalePopulation += parseInt(response.data[i][0]);
+                  // console.log('Male Total+', mCtrl.totalMalePopulation, 'Adding+', response.data[i][0])
+                } else if ((i !== 0 || 1) &&  (response.data[i][3] > 0) && (response.data[i][3] <= 18)  && response.data[i][2] == 2) {
+                  mCtrl.totalFemalePopulation += parseInt(response.data[i][0]);
+                  // console.log('Female Total+', mCtrl.totalFemalePopulation, 'Adding+', response.data[i][0])
                 }
+              }
 
-                // mCtrl.totalFemalePopulation = response.data[3][0];
-                // mCtrl.femalePopulationPercentage = (response.data[3][0] / response.data[1][0]) * 100;
-                // mCtrl.totalMalePopulation = response.data[2][0];
-                // mCtrl.malePopulationPercentage = (response.data[2][0] / response.data[1][0]) * 100;
+              // Create and Populate Age/Gender Group Array
+              mCtrl.ageGroupDefinition = [
+                '',
+                '0 to 4 years',
+                '5 to 9 years',
+                '10 to 14 years',
+                '15 to 19 years',
+                '20 to 24 years',
+                '25 to 29 years',
+                '30 to 34 years',
+                '35 to 39 years',
+                '40 to 44 years',
+                '45 to 49 years',
+                '50 to 54 years',
+                '55 to 59 years',
+                '60 to 64 years',
+                '65 to 69 years',
+                '70 to 74 years',
+                '75 to 79 years',
+                '80 to 84 years',
+                '85 years and older'
+              ]
+              mCtrl.maleAgeGroups = [];
+              mCtrl.femaleAgeGroups = [];
+              let holderObj = {};
+              for (var i = 0; i < response.data.length; i++) {
+                // Selecting male age groups
+                if ((i !== 0 || 1) && (response.data[i][3] > 0 ) && (response.data[i][3] <= 18 ) && response.data[i][2] == 1) {
+                  holderObj = {
+                    ageGroup: mCtrl.ageGroupDefinition[response.data[i][3]],
+                    value: response.data[i][0],
+                    gender: 'Male'
+                  }
+                  mCtrl.maleAgeGroups.push(holderObj);
+                }
+                // Selecting female age groups
+                else if ((i !== 0 || 1) && (response.data[i][3] > 0 ) && (response.data[i][3] <= 18 ) && response.data[i][2] == 2) {
+                  holderObj = {
+                    ageGroup: mCtrl.ageGroupDefinition[response.data[i][3]],
+                    value: response.data[i][0],
+                    gender: 'Female'
+                  }
+                  mCtrl.femaleAgeGroups.push(holderObj);
+                }
+              }
 
-                mCtrl.showFinished = true;
-                $('#collapseOne').collapse('show')
-              })
+              // console.log('Male groups: ', mCtrl.maleAgeGroups);
+              // console.log('Female groups: ', mCtrl.femaleAgeGroups);
+
+              mCtrl.maleMedianAge = response.data[64][0];
+              mCtrl.femaleMedianAge = response.data[96][0];
+              // mCtrl.malePopulationPercentage = response.data[i][2];
+              // mCtrl.femalePopulationPercentage = response.data[i][2];
+
+              // mCtrl.totalFemalePopulation = response.data[3][0];
+              // mCtrl.femalePopulationPercentage = (response.data[3][0] / response.data[1][0]) * 100;
+              // mCtrl.totalMalePopulation = response.data[2][0];
+              // mCtrl.malePopulationPercentage = (response.data[2][0] / response.data[1][0]) * 100;
+
+              mCtrl.showFinished = true;
+              $('#collapseOne').collapse('show')
+            })
+
+          $http({
+            url: '/api/characteristics-by-age-group/race',
+            method: 'POST',
+            data: {
+              stateID: mCtrl.stateID,
+              countyID: mCtrl.countyID,
+              placeID: mCtrl.placeID
+            }
+          })
+            .then(function(response) {
+              console.log('Race groups: ', response.data);
+              // Get Total Population By Gender
+              mCtrl.whiteTotal = 0;
+              mCtrl.whiteAgeGroups = [];
+              mCtrl.blackAgeGroups = [];
+              mCtrl.blackTotal = 0;
+              mCtrl.americanIndianAlaskanNativeAgeGroups = [];
+              mCtrl.americanIndianAlaskanNativeTotal = 0;
+              mCtrl.asianAgeGroups = [];
+              mCtrl.asianTotal = 0;
+              mCtrl.nativeHawaiianOtherPacificAgeGroups = [];
+              mCtrl.nativeHawaiianOtherPacificTotal = 0;
+              let holderObj = {};
+              for (var i = 0; i < response.data.length; i++) {
+                if ((i !== 0 || 1) &&  (response.data[i][3] > 0) &&  (response.data[i][3] <= 18) && response.data[i][2] == 1) {
+                  holderObj = {
+                    ageGroup: mCtrl.ageGroupDefinition[response.data[i][3]],
+                    value: response.data[i][0],
+                    race: 'White'
+                  }
+                  mCtrl.whiteTotal += parseInt(response.data[i][0]);
+                  mCtrl.whiteAgeGroups.push(holderObj);
+                } else if ((i !== 0 || 1) &&  (response.data[i][3] > 0) &&  (response.data[i][3] <= 18) && response.data[i][2] == 2) {
+                  holderObj = {
+                    ageGroup: mCtrl.ageGroupDefinition[response.data[i][3]],
+                    value: response.data[i][0],
+                    race: 'Black'
+                  }
+                  mCtrl.blackTotal += parseInt(response.data[i][0]);
+                  mCtrl.blackAgeGroups.push(holderObj);
+                } else if ((i !== 0 || 1) &&  (response.data[i][3] > 0) &&  (response.data[i][3] <= 18) && response.data[i][2] == 3) {
+                  holderObj = {
+                    ageGroup: mCtrl.ageGroupDefinition[response.data[i][3]],
+                    value: response.data[i][0],
+                    race: 'American Indian / Alaskan Native'
+                  }
+                  mCtrl.americanIndianAlaskanNativeTotal += parseInt(response.data[i][0]);
+                  mCtrl.americanIndianAlaskanNativeAgeGroups.push(holderObj);
+                } else if ((i !== 0 || 1) &&  (response.data[i][3] > 0) &&  (response.data[i][3] <= 18) && response.data[i][2] == 4) {
+                  holderObj = {
+                    ageGroup: mCtrl.ageGroupDefinition[response.data[i][3]],
+                    value: response.data[i][0],
+                    race: 'Asian'
+                  }
+                  mCtrl.asianTotal += parseInt(response.data[i][0]);
+                  mCtrl.asianAgeGroups.push(holderObj);
+                } else if ((i !== 0 || 1) &&  (response.data[i][3] > 0) &&  (response.data[i][3] <= 18) && response.data[i][2] == 5) {
+                  holderObj = {
+                    ageGroup: mCtrl.ageGroupDefinition[response.data[i][3]],
+                    value: response.data[i][0],
+                    race: 'Native Hawaiian / Other Pacific Islander'
+                  }
+                  mCtrl.nativeHawaiianOtherPacificTotal += parseInt(response.data[i][0]);
+                  mCtrl.nativeHawaiianOtherPacificAgeGroups.push(holderObj);
+                }
+              }
+            })
 
 
           })
