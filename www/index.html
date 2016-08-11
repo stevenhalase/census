@@ -80,6 +80,30 @@
             <div class="panel-heading" role="tab" id="headingThree">
               <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  Age Group Demographics <span class="label label-primary">New</span>
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                <div class="col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="ageGroup in mCtrl.ageGroups"><b>{{ageGroup.ageGroup}} :</b> {{ageGroup.value}}</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="ageGroup in mCtrl.extendedAgeGoups"><b>{{ageGroup.ageGroup}} :</b> {{ageGroup.value}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                   Components of Change Estimates
                 </a>
               </h4>
@@ -111,7 +135,7 @@
             <div class="panel-heading" role="tab" id="headingFour">
               <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                  Gender Demographics <span class="label label-primary">New</span>
+                  Gender Demographics
                 </a>
               </h4>
             </div>
@@ -142,7 +166,7 @@
             <div class="panel-heading" role="tab" id="headingFour">
               <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                  Race Demographics <span class="label label-primary">New</span>
+                  Race Demographics
                 </a>
               </h4>
             </div>

@@ -19,6 +19,7 @@ function mainController($http) {
   mCtrl.countyID = '';
   mCtrl.zipCode = '';
   mCtrl.countyPopulation = '';
+  mCtrl.ageGroupDefinition = [];
 
   mCtrl.getData = function() {
     console.log(mCtrl.location)
@@ -87,7 +88,7 @@ function mainController($http) {
             }
           })
             .then(function(response) {
-              console.log('Components of Change: ', response)
+              // console.log('Components of Change: ', response)
               mCtrl.GEONAME = response.data[1][0];
               mCtrl.BIRTHS = response.data[1][1];
               mCtrl.DEATHS = response.data[1][2];
@@ -116,7 +117,7 @@ function mainController($http) {
             }
           })
             .then(function(response) {
-              console.log('Characteristics By Age Group: ', response)
+              // console.log('Characteristics By Age Group: ', response)
               mCtrl.totalBothPopulation = 0;
               mCtrl.totalMalePopulation = 0;
               mCtrl.totalFemalePopulation = 0;
@@ -139,7 +140,7 @@ function mainController($http) {
 
               // Create and Populate Age/Gender Group Array
               mCtrl.ageGroupDefinition = [
-                '',
+                'All ages',
                 '0 to 4 years',
                 '5 to 9 years',
                 '10 to 14 years',
@@ -157,7 +158,20 @@ function mainController($http) {
                 '70 to 74 years',
                 '75 to 79 years',
                 '80 to 84 years',
-                '85 years and older'
+                '85 years and older',
+                'Under 18 years',
+                '5 to 13 years',
+                '14 to 17 years',
+                '18 to 64 years',
+                '18 to 24 years',
+                '25 to 44 years',
+                '45 to 64 years',
+                '65 years and over',
+                '85 years and over',
+                '16 years and over',
+                '18 years and over',
+                '15 to 44 years',
+                'Median age'
               ]
               mCtrl.maleAgeGroups = [];
               mCtrl.femaleAgeGroups = [];
@@ -210,7 +224,7 @@ function mainController($http) {
             }
           })
             .then(function(response) {
-              console.log('Race groups: ', response.data);
+              // console.log('Race groups: ', response.data);
               // Get Total Population By Gender
               mCtrl.whiteTotal = 0;
               mCtrl.whiteAgeGroups = [];
@@ -224,7 +238,7 @@ function mainController($http) {
               mCtrl.nativeHawaiianOtherPacificTotal = 0;
               let holderObj = {};
               for (var i = 0; i < response.data.length; i++) {
-                if ((i !== 0 || 1) &&  (response.data[i][3] > 0) &&  (response.data[i][3] <= 18) && response.data[i][2] == 1) {
+                if ((i !== 0 || i !== 1) &&  (response.data[i][3] > 0) &&  (response.data[i][3] <= 18) && response.data[i][2] == 1) {
                   holderObj = {
                     ageGroup: mCtrl.ageGroupDefinition[response.data[i][3]],
                     value: response.data[i][0],
@@ -267,6 +281,80 @@ function mainController($http) {
                 }
               }
             })
+
+            $http({
+              url: '/api/characteristics-by-age-group/age',
+              method: 'POST',
+              data: {
+                stateID: mCtrl.stateID,
+                countyID: mCtrl.countyID,
+                placeID: mCtrl.placeID
+              }
+            })
+              .then(function(response) {
+                // console.log('Age groups: ', response.data);
+                mCtrl.ageGroups = [];
+                mCtrl.extendedAgeGoups = [];
+
+                // Create and Populate Age/Gender Group Array
+                mCtrl.ageGroupDefinition = [
+                  'All ages',
+                  '0 to 4 years',
+                  '5 to 9 years',
+                  '10 to 14 years',
+                  '15 to 19 years',
+                  '20 to 24 years',
+                  '25 to 29 years',
+                  '30 to 34 years',
+                  '35 to 39 years',
+                  '40 to 44 years',
+                  '45 to 49 years',
+                  '50 to 54 years',
+                  '55 to 59 years',
+                  '60 to 64 years',
+                  '65 to 69 years',
+                  '70 to 74 years',
+                  '75 to 79 years',
+                  '80 to 84 years',
+                  '85 years and older',
+                  'Under 18 years',
+                  '5 to 13 years',
+                  '14 to 17 years',
+                  '18 to 64 years',
+                  '18 to 24 years',
+                  '25 to 44 years',
+                  '45 to 64 years',
+                  '65 years and over',
+                  '85 years and over',
+                  '16 years and over',
+                  '18 years and over',
+                  '15 to 44 years',
+                  'Median age'
+                ]
+
+                let holderObj = {};
+                for (var i = 0; i < response.data.length; i++) {
+                  // Selecting male age groups
+                  if (i !== 0 && i < 20) {
+                    holderObj = {
+                      ageGroup: mCtrl.ageGroupDefinition[i-1],
+                      value: response.data[i][0],
+                    }
+                    mCtrl.ageGroups.push(holderObj);
+                  } else if (i !== 0 && i >= 20){
+                    holderObj = {
+                      ageGroup: mCtrl.ageGroupDefinition[i-1],
+                      value: response.data[i][0],
+                    }
+                    mCtrl.extendedAgeGoups.push(holderObj);
+                  }
+                }
+                // console.log(mCtrl.ageGroups)
+
+              })
+
+
+
 
 
           })

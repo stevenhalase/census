@@ -75,6 +75,17 @@ app.post('/api/characteristics-by-age-group/gender', function(req, res) {
   })
 })
 ///// API County Characteristics By Age Group / Race
+app.post('/api/characteristics-by-age-group/age', function(req, res) {
+  console.log(req.body);
+  let censusKey = '6c7cd8a681e867881692945c8265e00d5f76b7ba';
+  let popEstQuery = 'https://api.census.gov/data/2015/pep/charagegroups?get=POP,GEONAME,AGEGROUP&for=COUNTY:' + req.body.countyID + '&in=state:' + req.body.stateID + '&key=' + censusKey;
+  request(popEstQuery , function (error, response, body) {
+    if(error){console.log('Error: ', error)};
+    console.log('Body: ', body);
+    res.send(body);
+  })
+})
+///// API County Characteristics By Age Group / Race
 app.post('/api/characteristics-by-age-group/race', function(req, res) {
   console.log(req.body);
   let censusKey = '6c7cd8a681e867881692945c8265e00d5f76b7ba';
